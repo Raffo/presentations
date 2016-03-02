@@ -1,0 +1,147 @@
+Go @ Zalando
+1 March 2016
+Tags: go golang zalando
+
+Raffaele Di Fazio
+raffaele.di.fazio@zalando.de
+@x0rg
+
+Arpad Ryszka
+arpad.ryszka@zalando.de 
+@arpad_ryszka
+
+* Agenda
+- Zalando introduction
+- Where/How/Why Go is used
+- Skipper, Chimp and other apps 
+
+* One of Europe's largest online fashion retailers
+- 15 countries
+- 4 fulfillment centers
+- 17+ million active customers
+- 2.9+ billion € revenue 2015
+- 135+ million visits per month
+- 10.000+ employees in DE
+- 2 new Tech HQ in 2015: Dublin and Helsinki
+
+* Zalando Tech History
+- Founded in 2008
+- Originally based on Magento (PHP)
+- Rewritten in Java from 2010
+- Now: Microservices in Java, Scala, Clojure, Python, ...
+- ... and Go!
+
+* Zalando Tech History
+.image zalando.svg 400 _
+
+* Why Go
+- For a lot of reasons you probably know
+- Static typing
+- Static binaries
+- We can build lightweight components for our Infrastructure 
+- Stable enough, improves at every release (i.e. GC)
+- Nice concurrency
+- ... simple and readable
+
+
+*  
+.image tm.jpeg 300 _ 
+
+
+
+* Platform @ Zalando 
+We are using Go for any new tool we build:
+
+- Baboon-proxy (F5 proxy)
+- Gin middlewares (Oauth2, monitoring, logging)
+- Chimp (Opinionated cli/server tool for Kubernetes/Marathon)
+- ... many more!
+
+.link https://github.com/zalando-techmonkeys/ Find us on GitHub
+
+* An overview of our Infrastructure
+
+.image monkey-simple-arch.jpg 500 _
+
+* The Shop and Skipper
+
+* The Shop and Skipper
+We started rebuilding the Shop, Zalando's main customer facing web site.
+
+One of our goals was to enable independent teams working
+on the same web frontend:
+
+- Independent development/deployment cycles
+- Independent code base
+- Consistent user experience
+
+Go just sneaked in to our toolset...
+
+* Mosaic infrastructure
+
+Pages are composed from fragments.
+
+Fragments are like microservices for web frontend.
+
+Key components of the supporting infrastructure:
+
+- Routing
+- Layout composition
+- Component library
+
+* Skipper - HTTP "Router"
+
+For one: a multipurpose HTTP network tool.
+Also: the router component from the "MVC" terminology, as a service.
+
+.image postmvc.png
+
+* Skipper - Inception
+
+Prototyping with Vulcand: awesome design, but not flexible enough
+
+Three competing solutions:
+
+- Nginx with Lua
+- Scala/Akka
+- Skipper
+
+The Go http stack + Skipper's design came out winner.
+
+* Skipper - Main features
+
+- By default, just a reverse proxy
+- Filters control the request flow
+- Routing updated on the fly
+- Extension points: predicates, filters, data sources
+- Eskip: route definition language
+
+.code example.eskip
+
+* Skipper - Seeds of Tooling
+
+- Eskip - included
+- Parskip (Haskell) by Moritz Grauel - https://github.com/mo-gr/parskip
+- Syntax highlighting by Dmitriy Kubyshkin - https://github.com/grassator/eskip.tmbundle
+
+Production experience coming...
+
+.image skipper.png
+
+* Go, Zalando, Open Source
+
+* Making our Go code Open and reusable
+- "Open Source first" - when appropriate
+- Code is designed to be usable outside Zalando
+- "Compilation over configuration" (with build tags) 
+.code interface.go
+
+* Making our Go code Open and reusable
+.code impl.go
+
+* That's it
+- Go will keep growing at Zalando
+- Increase participation in Meetups :-)
+- Internal trainings planned
+- ... you can help us (we are hiring!)
+
