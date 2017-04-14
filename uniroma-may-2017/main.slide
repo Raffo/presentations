@@ -1,0 +1,105 @@
+My app is ready, now what? 
+Large scale deployments for cloud native enterprises
+
+9 May 2017
+
+Raffaele Di Fazio
+Zalando SE
+raffaele.di.fazio@zalando.de
+@x0rg
+
+* Agenda
+- From the 20yo point of view
+- From the classical enterprise point of view
+- From the modern enterprise point of view 
+- Containers to the rescue
+
+* From the 20yo point of view 
+- You worked hard to develop your web application, now it's ready!
+- How do I make it available on the web? 
+
+* What: dependencies
+- Libraries? 
+- Operating system
+- Dependencies: DB, queues, etc.
+
+* Where: infrastructure
+- Rent a server, copy manually the application (FTP, SCP, ...)
+- Cloud IaaS, copy the application to the VM
+- PaaS (Heroku, AppEngine), think only about "the app"
+- Serverless, you app is just a function
+
+* Okay, it runs, then what?
+
+* What about updates? 
+- What if you need to fix a bug?
+- What if you need to implement a new feature? 
+
+- Is a manual deploy an option? 
+
+* What about scale?
+- What do you do if you want to scale your application to serve more traffic? 
+- How is your deployment strategy linked to that? 
+- What about the servers? How do you get new ones? How do you keep them updated? 
+
+* Enterprise world
+
+* TODO insert picture of Zalando
+
+* Enterprises have additional requirements
+- Compliance
+- Traceability
+- Reproduceable deployments
+
+* Zalando: Europe's largest online fashion retailer
+- 15 countries
+- 6 fulfillment centers
+- 20 million active customers
+- 3.6 billion € net sales 2016
+- 165 million visits per month
+- 12.000 employees in EU
+
+* Zalando, the tech parts
+- 1600+ employees
+- 6 tech locations, even more offices
+- From monolith to microservices
+- Services in Java, Scala, Clojure, Python, Go, ...
+
+* Recap
+.image 9-may.png 800 _
+
+* What are we looking for? 
+
+- Availability
+- Scale
+- Speed (rapid iteration)
+
+* How do you make all of this happen?
+
+* Ingredients
+- Use cloud resources
+- Design for failures
+- Developers can deploy at any time
+- No release management, only approvals
+- "You build it, you run it" 
+
+* Rules
+- Package your applications in a format that it's easy to deploy
+- Docker containers: self contained application
+
+* Finally some technical details
+
+* Containers: the base ingrediant
+- All of our applications are packaged into (Docker) containers
+
+* Orchestration: the sauce
+- We use [[http://kubernetes.io][Kubernetes]] to orchestrate them
+- Scale
+- Self healing 
+
+* What we don't do
+- Build the OS image
+- Give access to the OS
+- Update the OS. Our servers are "immutable"
+
+* Image from Henning's slide "Isolated AWS accounts"
