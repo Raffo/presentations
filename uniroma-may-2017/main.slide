@@ -1,71 +1,80 @@
 My app is ready, now what? 
-Large scale deployments for cloud native enterprises
+Large scale deployments for cloud native applications
 
 9 May 2017
 
 Raffaele Di Fazio
+Software Engineer
 Zalando SE
 raffaele.di.fazio@zalando.de
 @x0rg
 
 * Agenda
-- From the 20yo point of view
-- From the classical enterprise point of view
-- From the modern enterprise point of view 
+- The independent developer
+- The enterprise
 - Containers to the rescue
 
-* From the 20yo point of view 
-- You worked hard to develop your web application, now it's ready!
-- How do I make it available on the web? 
+* Goal
+To introduce some problems that go beyond application development which are essential part of the life of a software. To explain how technology plays a big role in solving those problems and why you should care to learn it. 
 
-* What: dependencies
-- Libraries? 
-- Operating system
-- Dependencies: DB, queues, etc.
+* The independent developer
+- You worked hard to develop your web application, now it's ready!
+- How do you make it available on the web? 
 
 * Where: infrastructure
-- Rent a server, copy manually the application (FTP, SCP, ...)
-- Cloud IaaS, copy the application to the VM
+- Rent a server, copy manually the application (FTP, scp, ...)
+- Cloud IaaS, copy/bundle the application to/with the VM
 - PaaS (Heroku, AppEngine), think only about "the app"
 - Serverless, you app is just a function
+
+* What: dependencies
+- Which libraries do you need?
+- Operating system, does your app run anywhere?
+- Other dependencies: DBs, queues, etc.
 
 * Okay, it runs, then what?
 
 * What about updates? 
 - What if you need to fix a bug?
-- What if you need to implement a new feature? 
+- What if you need a new feature? 
+- What if you find a security vulnerability? 
+- What about the underliying infrastructure updates (kernel, OS, ...)?
 
-- Is a manual deploy an option? 
+* Is a "manual" deploy really an option? 
 
 * What about scale?
 - What do you do if you want to scale your application to serve more traffic? 
 - How is your deployment strategy linked to that? 
-- What about the servers? How do you get new ones? How do you keep them updated? 
+- What about the servers? 
+- How do you get new ones? 
+- How do you keep them updated? 
 
-* Enterprise world
-
-* TODO insert picture of Zalando
+* Enterprise world(s)
+: There are different kinds of "enterprise", differentiated mostly by the way technology is threated. 
 
 * Enterprises have additional requirements
 - Compliance
 - Traceability
 - Reproduceable deployments
+- Scaling the organization - high number of employees
+
+* Case study: Zalando
 
 * Zalando: Europe's largest online fashion retailer
 - 15 countries
 - 6 fulfillment centers
 - 20 million active customers
-- 3.6 billion € net sales 2016
+- 3.6 billion € net sales in 2016
 - 165 million visits per month
 - 12.000 employees in EU
 
 * Zalando, the tech parts
-- 1600+ employees
-- 6 tech locations, even more offices
-- From monolith to microservices
-- Services in Java, Scala, Clojure, Python, Go, ...
 
-* Recap
+.image zalando.png 400 _ 
+
+* You can imagine the challenge
+
+* Let's sum it all up
 .image 9-may.png 800 _
 
 * What are we looking for? 
@@ -80,26 +89,55 @@ raffaele.di.fazio@zalando.de
 - Use cloud resources
 - Design for failures
 - Developers can deploy at any time
-- No release management, only approvals
-- "You build it, you run it" 
+- Keep the feedback loop short
+
+* How we achieve this at Zalando
 
 * Rules
 - Package your applications in a format that it's easy to deploy
-- Docker containers: self contained application
+- ...
+: Rules alone are not enough, let's see with which technologies we do this
 
-* Finally some technical details
+* Some technical details
 
-* Containers: the base ingrediant
+* Containers: the base ingredient
 - All of our applications are packaged into (Docker) containers
+- Container: "A container image is a lightweight, stand-alone, executable package of a piece of software that includes everything needed to run it: code, runtime, system tools, system libraries."
+- Containers share the host kernel
+- Not like virtualization, only uses OS features to allow isolating apps as "containers" (CGroups, namespaces)
 
-* Orchestration: the sauce
-- We use [[http://kubernetes.io][Kubernetes]] to orchestrate them
+* Demo
+: Show how to launch a docker container, exec into it and see what you see into it, the limited process view
+
+* Okay, tell me more!
+- CGroups: resource limits for CPU, Memory, ...
+- Namespaces: isolation of PIDs, Users, ...
+- Contains everything you need to run (libraries, binaries, etc.)
+- Layer based filesystem, based on Copy on Write
+
+* How do you really launch containers at scale?
+: Without entering all the possible options which are way too many, I'll just show how this works with an orchestrator
+
+* Container Orchestration
+- We use [[http://kubernetes.io][Kubernetes]] to orchestrate containers
+- Deploy
 - Scale
-- Self healing 
+- Self heal
 
-* What we don't do
-- Build the OS image
-- Give access to the OS
-- Update the OS. Our servers are "immutable"
+* Orchestration: the sauce (2)
+- "Compute" resources abstracted away from the developer
+- All the responsibilities are moved into the "container" level
 
-* Image from Henning's slide "Isolated AWS accounts"
+* Kubernetes, the architecture
+
+.image kubernetes_architecture.png 400 _
+#
+#* How our setup looks like at scale
+#
+#* Isolated AWS accounts
+#
+#.image isolated_accounts.png 400 _
+
+* Demo - deploying an application on Kubernetes
+
+* Questions?
