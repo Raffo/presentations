@@ -17,7 +17,7 @@ raffaele.di.fazio@zalando.de
 * Goal
 To introduce some problems that go beyond application development which are essential part of the life of a software. To explain how technology plays a big role in solving those problems and why you should care to learn them.
 
-* Real world is hard.
+* Real world is hard
 
 * You
 - You worked hard to develop your web application, now it's ready!
@@ -40,7 +40,7 @@ To introduce some problems that go beyond application development which are esse
 - What if you need to fix a bug?
 - What if you need a new feature? 
 - What if you find a security vulnerability? 
-- What about the underliying infrastructure updates (kernel, OS, ...)?
+- What about the underlying infrastructure updates (kernel, OS, ...)?
 
 * Is a "manual" deploy really an option? 
 
@@ -52,11 +52,11 @@ To introduce some problems that go beyond application development which are esse
 - How do you keep them updated? 
 
 * Enterprise world(s)
-: There are different kinds of "enterprise", differentiated mostly by the way technology is threated. 
+: There are different kinds of "enterprise", differentiated mostly by the way technology is treated. 
 
 * Enterprises have additional requirements
 - Compliance
-- (Hopefully) Reproduceable deployments
+- (Hopefully) Reproducible deployments
 - Scale (people)
 
 * Case study: Zalando
@@ -83,6 +83,8 @@ To introduce some problems that go beyond application development which are esse
 - Speed (rapid iteration)
 
 * How do you make all of this happen?
+
+* Cloud Native
 
 * Ingredients
 - Use cloud resources
