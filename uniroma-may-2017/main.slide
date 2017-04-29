@@ -15,17 +15,19 @@ raffaele.di.fazio@zalando.de
 - Containers to the rescue
 
 * Goal
-To introduce some problems that go beyond application development which are essential part of the life of a software. To explain how technology plays a big role in solving those problems and why you should care to learn it. 
+To introduce some problems that go beyond application development which are essential part of the life of a software. To explain how technology plays a big role in solving those problems and why you should care to learn them.
 
-* The independent developer
+* Real world is hard.
+
+* You
 - You worked hard to develop your web application, now it's ready!
 - How do you make it available on the web? 
 
 * Where: infrastructure
-- Rent a server, copy manually the application (FTP, scp, ...)
-- Cloud IaaS, copy/bundle the application to/with the VM
-- PaaS (Heroku, AppEngine), think only about "the app"
-- Serverless, you app is just a function
+- Phisical server
+- IaaS: you get a VM
+- PaaS: think only about "the app"
+- FaaS: you app is just a function
 
 * What: dependencies
 - Which libraries do you need?
@@ -54,11 +56,11 @@ To introduce some problems that go beyond application development which are esse
 
 * Enterprises have additional requirements
 - Compliance
-- Traceability
-- Reproduceable deployments
-- Scaling the organization - high number of employees
+- (Hopefully) Reproduceable deployments
+- Scale (people)
 
 * Case study: Zalando
+: If you reached that point you are probably already scared and you want to never deploy anything again. I will present you a case study and show you why it's really not so bad.
 
 * Zalando: Europe's largest online fashion retailer
 - 15 countries
@@ -72,10 +74,7 @@ To introduce some problems that go beyond application development which are esse
 
 .image zalando.png 400 _ 
 
-* You can imagine the challenge
-
-* Let's sum it all up
-.image 9-may.png 800 _
+* It's challenging :-)
 
 * What are we looking for? 
 
@@ -91,14 +90,7 @@ To introduce some problems that go beyond application development which are esse
 - Developers can deploy at any time
 - Keep the feedback loop short
 
-* How we achieve this at Zalando
-
-* Rules
-- Package your applications in a format that it's easy to deploy
-- ...
-: Rules alone are not enough, let's see with which technologies we do this
-
-* Some technical details
+* How we achieve this
 
 * Containers: the base ingredient
 - All of our applications are packaged into (Docker) containers
@@ -128,15 +120,10 @@ To introduce some problems that go beyond application development which are esse
 - "Compute" resources abstracted away from the developer
 - All the responsibilities are moved into the "container" level
 
+
 * Kubernetes, the architecture
 
 .image kubernetes_architecture.png 400 _
-#
-#* How our setup looks like at scale
-#
-#* Isolated AWS accounts
-#
-#.image isolated_accounts.png 400 _
 
 * Demo - deploying an application on Kubernetes
 
