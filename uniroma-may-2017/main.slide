@@ -54,11 +54,6 @@ To introduce some problems that go beyond application development which are esse
 * Enterprise world(s)
 : There are different kinds of "enterprise", differentiated mostly by the way technology is treated. 
 
-* Enterprises have additional requirements
-- Compliance
-- (Hopefully) Reproducible deployments
-- Scale (people)
-
 * Case study: Zalando
 : If you reached that point you are probably already scared and you want to never deploy anything again. I will present you a case study and show you why it's really not so bad.
 
@@ -82,9 +77,13 @@ To introduce some problems that go beyond application development which are esse
 - Scale
 - Speed (rapid iteration)
 
-* How do you make all of this happen?
+* What are we really doing this? 
+- Small teams 
+- Everything has/is an API
+- Micro services
+- Multi language programming enviroment
 
-* Cloud Native
+* The technical parts: cloud native
 
 * Ingredients
 - Use cloud resources
@@ -109,23 +108,18 @@ To introduce some problems that go beyond application development which are esse
 - Contains everything you need to run (libraries, binaries, etc.)
 - Layer based filesystem, based on Copy on Write
 
-* How do you really launch containers at scale?
-: Without entering all the possible options which are way too many, I'll just show how this works with an orchestrator
+* How do you manage containers?
+
+* Cattles not pets
+- Treat your containers as something that can and should be replaced
+- Get ready to lose them, kill them, replace them
+- Never call them by name
 
 * Container Orchestration
 - We use [[http://kubernetes.io][Kubernetes]] to orchestrate containers
 - Deploy
 - Scale
 - Self heal
-
-* Orchestration: the sauce (2)
-- "Compute" resources abstracted away from the developer
-- All the responsibilities are moved into the "container" level
-
-
-* Kubernetes, the architecture
-
-.image kubernetes_architecture.png 400 _
 
 * Demo - deploying an application on Kubernetes
 
