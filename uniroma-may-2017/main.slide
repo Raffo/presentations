@@ -57,6 +57,8 @@ To introduce some problems that go beyond application development which are esse
 * Case study: Zalando
 : If you reached that point you are probably already scared and you want to never deploy anything again. I will present you a case study and show you why it's really not so bad.
 
+.image z.png 400 _
+
 * Zalando: Europe's largest online fashion retailer
 - 15 countries
 - 6 fulfillment centers
@@ -114,6 +116,7 @@ To introduce some problems that go beyond application development which are esse
 - Treat your containers as something that can and should be replaced
 - Get ready to lose them, kill them, replace them
 - Never call them by name
+- Hide the servers (VMs) whenever possible
 
 * Container Orchestration
 - We use [[http://kubernetes.io][Kubernetes]] to orchestrate containers
