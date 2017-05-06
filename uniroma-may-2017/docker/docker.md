@@ -10,3 +10,6 @@ Script for the demo
 
 5. Show how to create a dockerfile
 
+6. docker build . -t uniroma -f Dockerfile
+
+7. docker run uniroma
