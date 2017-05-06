@@ -24,7 +24,7 @@ To introduce some problems that go beyond application development which are esse
 - How do you make it available on the web? 
 
 * Where: infrastructure
-- Phisical server
+- Physical server
 - IaaS: you get a VM
 - PaaS: think only about "the app"
 - FaaS: you app is just a function
@@ -59,9 +59,9 @@ To introduce some problems that go beyond application development which are esse
 
 .image z.png 400 _
 
-* Zalando: Europe's largest online fashion retailer
+* Zalando: Europe's largest online fashion platform 
 - 15 countries
-- 6 fulfillment centers
+- 7 tech hubs
 - 20 million active customers
 - 3.6 billion € net sales in 2016
 - 165 million visits per month
@@ -112,7 +112,7 @@ To introduce some problems that go beyond application development which are esse
 
 * How do you manage containers?
 
-* Cattles not pets
+* Cattle not pets
 - Treat your containers as something that can and should be replaced
 - Get ready to lose them, kill them, replace them
 - Never call them by name
