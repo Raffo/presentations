@@ -1,0 +1,95 @@
+Introduction to Go
+8 February 2018
+Tags: go golang 
+
+Raffaele Di Fazio
+@x0rg
+
+* Goal 
+Show you what Go is about, design decisions and why it makes sense as a language.
+
+* Yup, these slides are made in Go :-O
+
+* What is Go? 
+- "Go is an open source programming language that makes it easy to build simple, reliable, and efficient software."
+- Designed as a "system language", works well for microservices / HTTP APIs.
+
+* Who uses Go? 
+- Projects: Docker, Kubernetes, ethereum, prometheus, ...
+- Companies: Google, Microsoft, Cloudflare, Stripe, ... 
+
+* What: Features
+- Fast compiler
+- Fast execution
+- Static binaries (no dependencies)
+- Great tooling (gofmt, pprof, trace, ...)
+- Standard library
+
+* Features 
+- Garbage collected
+- Statically typed
+- Type safe
+- Concurrency through Channels, Goroutines
+- Supports closures
+
+* Focused on simplicity
+- [[https://www.youtube.com/watch?v=rFejpH_tAHM][Simplicity is complicated]]
+- Focused on readability and no magic
+- No "smart" features (map, filter, ...)
+
+* Language basics
+- No type hierarchy
+- Structs, pointers and methods
+- Interfaces to specify behaviours 
+
+* Let's have a look
+
+* Hello World
+.play hello.go
+
+* Interfaces
+- Set of methods, no data
+- Enables component architectures
+
+* Interface examples
+.play -edit interfaces.go
+
+* Cross compilable static binaries 
+.code build.sh
+
+* Lightweight concurrency 
+- Goroutines
+- Channels
+- Atomic types, Sync, ...
+
+* Goroutines
+.play goroutines.go
+
+* Channels 
+.play channels.go
+
+* Writing an HTTP API
+
+* Writing an HTTP API
+.code example.go
+
+* Some libraries and framework for HTTP APIs
+- [[https://golang.org/pkg/net/http/]]
+- [[https://github.com/gin-gonic/gin]]
+- [[https://github.com/go-kit/kit]]
+
+* Why Go?
+- Code is written for humans before machines
+- Humans have different background and skills
+- [[https://www.infoq.com/presentations/go-concurrency-gc][The why of Go]]
+
+* Now for something completely different
+
+* I built an API...
+- [[https://github.com/go-resty/resty][Retries]]
+- [[https://github.com/sony/gobreaker][Circuit breaker]]
+- [[https://github.com/go-kit/kit/tree/master/metrics][Metrics]]
+- [[https://github.com/sirupsen/logrus][Logging]]
+- [[https://github.com/alecthomas/kingpin][Config flags]]
+- [[https://github.com/golang/dep][Dependency Management]]
+- We will talk more about this in "the future" :-) 
