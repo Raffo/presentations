@@ -1,0 +1,74 @@
+Go Best Practices: How not to reinvent the wheel
+6 February 2018
+Tags: go golang 
+
+Raffaele Di Fazio
+@x0rg
+
+* Disclaimer
+Those are things that made sense for me and a bunch of other folks doing ~3 years of Go in production. 
+There is no truth, only opinions and you have to try things to understand what works better. 
+Please take this with a grain of salt. 
+
+* Project structure
+
+.code structure.txt
+
+* Building
+- Use a Makefile
+.code -edit -numbers Makefile
+
+* Logging
+- Avoid using the standard logger, has quite a lot of shortcomings. 
+- Suggested: [[https://github.com/sirupsen/logrus]]
+- My favourite: [[https://github.com/go-kit/kit/tree/master/log]]
+- Take whatever you find simpler, don’t overcomplicate it
+- If possible, use a pluggable logger such that you can ease your tests
+- Do *NOT* reinvent logging.
+
+* Monitoring / Metrics
+- Consider exposing metrics from day 1!
+- Use [[https://github.com/go-kit/kit/tree/master/metrics]]
+- Expose the metrics in a goroutine
+
+* Dependency Management
+- Go uses the “vendor” folder 
+- Try using [[https://github.com/golang/dep]] (semi official solution) 
+- Alternative: [[https://github.com/Masterminds/glide]]
+
+* HTTP API Development
+- This is a very broad topic. 
+- I would keep this for an entirely different presentation :-) 
+
+* CLI Tools 
+- Minimal tool with great flexibility [[https://github.com/alecthomas/kingpin]]
+- If you are doing something very complicated: [[https://github.com/spf13/cobra]]
+
+* Testing
+- Use the standard library, it is just great
+
+* Table driving testing
+.code table-test.go
+
+* Advanced testing
+- Testing at Hashicorp [[https://www.youtube.com/watch?v=yszygk1cpEc]]
+
+* From "Go best practices, six years in"
+- Put $GOPATH/bin in your $PATH, so installed binaries are easily accessible.
+- Put library code under a pkg/ subdirectory. Put binaries under a cmd/ subdirectory.
+- Always use fully-qualified import paths. Never use relative imports.
+- Defer to Andrew Gerrand’s naming conventions.
+- Only func main has the right to decide which flags are available to the user.
+- Use struct literal initialization to avoid invalid intermediate state.
+- Avoid nil checks via default no-op implementations.
+- Make the zero value useful, especially in config objects.
+
+* From "Go best practices, six years in" - cont'd
+- Make dependencies explicit!
+- Loggers are dependencies, just like references to other components, database handles, commandline flags, etc.
+- Use many small interfaces to model dependencies.
+- Tests only need to test the thing being tested.
+- Use a top tool to vendor dependencies for your binary.
+- Libraries should never vendor their dependencies.
+- Prefer go install to go build.
+
