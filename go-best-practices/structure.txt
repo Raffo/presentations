@@ -1,4 +1,4 @@
-github.com/blacklane/foo/
+github.com/foo/bar/
   cmd/
     foosrv/
       main.go

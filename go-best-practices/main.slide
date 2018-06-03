@@ -1,38 +1,80 @@
 Go Practices: Suggestions to not reinvent the wheel
-6 February 2018
+5 June 2018
 Tags: go golang
 
 Raffaele Di Fazio
 @x0rg
 
-* Disclaimer
-Those are things that made sense for me and a bunch of other folks doing ~3 years of Go in production.
-There is no truth, only opinions and you have to try things to understand what works better.
-Please take this with a grain of salt.
+* If you really need to do one thing... 
+.image peter.png _ 400
 
-* On the word "best practice"
-- I won't use that because it mean 
+* If you really need to do one thing... 
+.link https://peter.bourgon.org/go-for-industrial-programming/ Go for Industrial Programming
+.link https://peter.bourgon.org/blog/2017/06/09/theory-of-modern-go.html A Theory of Modern Go
+.link https://peter.bourgon.org/go-best-practices-2016/ Go best practices, six years in
+
+* Go practices 
+: Those are things that made sense for me and a bunch of other folks doing ~3 years of Go in production.
+: There is no truth, only opinions and you have to try things to understand what works better.
+: Please take this with a grain of salt.
+.image yosemite.jpg _ 800
+
+* On "best practices"
+: I won't use that because it means I know it best. Seriously, I don't.
+.image hand.jpg _ 800
+
+* Topics
+- Project structure
+- Building
+- Logging
+- Monitoring
+- Dependency Management
+- HTTP API Development
+- CLI Tools
+- Testing
+
+* Project structure
 
 * Project structure
 
 .code structure.txt
 
-* Building
+* Building the project
+
+* Building the project
 - Use a Makefile
 .code -edit -numbers Makefile
+
+* Building the project
+.code -edit -numbers Makefile.building
+
+* Logging
 
 * Logging
 - Avoid using the standard logger, has quite a lot of shortcomings.
 - Suggested: [[https://github.com/sirupsen/logrus]]
 - My favourite: [[https://github.com/go-kit/kit/tree/master/log]]
 - Take whatever you find simpler, don’t overcomplicate it
+
+* Logging cont'd
+- Always use structured logging
+
+
+* Logging can kill your app
+- Logging in the wrong way
+
+* The downside of most loggers
 - If possible, use a pluggable logger such that you can ease your tests
 - Do *NOT* reinvent logging.
 
-* Monitoring / Metrics
+* Monitoring
+
+* Monitoring
 - Consider exposing metrics from day 1!
 - Use [[https://github.com/go-kit/kit/tree/master/metrics]]
 - Expose the metrics in a goroutine
+
+* Dependency Management
 
 * Dependency Management
 - Go uses the “vendor” folder
@@ -40,15 +82,22 @@ Please take this with a grain of salt.
 - Alternative: [[https://github.com/Masterminds/glide]]
 
 * HTTP API Development
+
+* HTTP API Development
 - This is a very broad topic.
 - I would keep this for an entirely different presentation :-)
+
+* CLI Tools
 
 * CLI Tools
 - Minimal tool with great flexibility [[https://github.com/alecthomas/kingpin]]
 - If you are doing something very complicated: [[https://github.com/spf13/cobra]]
 
 * Testing
+
+* Testing
 - Use the standard library, it is just great
+- An alternative is testify: [[https://github.com/stretchr/testifys]]
 
 * Table driving testing
 .code table-test.go
