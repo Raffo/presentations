@@ -1,14 +1,17 @@
-Go Best Practices: How not to reinvent the wheel
+Go Practices: Suggestions to not reinvent the wheel
 6 February 2018
-Tags: go golang 
+Tags: go golang
 
 Raffaele Di Fazio
 @x0rg
 
 * Disclaimer
-Those are things that made sense for me and a bunch of other folks doing ~3 years of Go in production. 
-There is no truth, only opinions and you have to try things to understand what works better. 
-Please take this with a grain of salt. 
+Those are things that made sense for me and a bunch of other folks doing ~3 years of Go in production.
+There is no truth, only opinions and you have to try things to understand what works better.
+Please take this with a grain of salt.
+
+* On the word "best practice"
+- I won't use that because it mean 
 
 * Project structure
 
@@ -19,7 +22,7 @@ Please take this with a grain of salt.
 .code -edit -numbers Makefile
 
 * Logging
-- Avoid using the standard logger, has quite a lot of shortcomings. 
+- Avoid using the standard logger, has quite a lot of shortcomings.
 - Suggested: [[https://github.com/sirupsen/logrus]]
 - My favourite: [[https://github.com/go-kit/kit/tree/master/log]]
 - Take whatever you find simpler, don’t overcomplicate it
@@ -32,15 +35,15 @@ Please take this with a grain of salt.
 - Expose the metrics in a goroutine
 
 * Dependency Management
-- Go uses the “vendor” folder 
-- Try using [[https://github.com/golang/dep]] (semi official solution) 
+- Go uses the “vendor” folder
+- Try using [[https://github.com/golang/dep]] (semi official solution)
 - Alternative: [[https://github.com/Masterminds/glide]]
 
 * HTTP API Development
-- This is a very broad topic. 
-- I would keep this for an entirely different presentation :-) 
+- This is a very broad topic.
+- I would keep this for an entirely different presentation :-)
 
-* CLI Tools 
+* CLI Tools
 - Minimal tool with great flexibility [[https://github.com/alecthomas/kingpin]]
 - If you are doing something very complicated: [[https://github.com/spf13/cobra]]
 
