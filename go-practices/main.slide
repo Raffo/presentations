@@ -68,7 +68,7 @@ Raffaele Di Fazio
 * Logging
 
 * Logging
-- Avoid using the standard logger, has quite a lot of shortcomings.
+- Avoid using the standard logger, has quite a lot of shortcomings
 - Suggested: [[https://github.com/sirupsen/logrus]]
 - My favourite: [[https://github.com/go-kit/kit/tree/master/log]]
 - Take whatever you find simpler, don’t overcomplicate it
@@ -80,7 +80,7 @@ Raffaele Di Fazio
 
 * Logging can kill your app
 - Logging in the wrong way can make your application unresponsive
-- Do not rely on logging to understand what your app is doing.
+- Do not rely on logging to understand what your app is doing
 - Use metrics instead (discussed later)
 
 * The downside of most loggers
@@ -105,7 +105,7 @@ Raffaele Di Fazio
 * Dependency Management
 - Yes it's kind of a mess in Go
 - Go uses the “vendor” folder
-- Many tools
+- Many tools...
 - vgo proposal [[https://github.com/golang/go/wiki/vgo]]
 
 * Dependency Management 101
@@ -117,7 +117,7 @@ Raffaele Di Fazio
 
 * REST API Development
 - Beware: very broad topic
-- Idiomatic, fast, elegant, choose the metric you like
+- Idiomatic, fast, elegant, choose what matters the most for you
 - Do not optimize for all
 
 * REST API Development
