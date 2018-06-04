@@ -37,7 +37,7 @@ Raffaele Di Fazio
 * General Topics
 
 * Don't use the init function
-- Just don't, seriously.
+- Just don't, seriously
 - The *glog* example
 
 * glog: Google logging module
@@ -45,7 +45,7 @@ Raffaele Di Fazio
 .code glog.go
 
 * Dependency Injection
-- Do it in the main as much as you can.
+- Do it in the main as much as you can
 - Initialize stuff
 - Wire things
 - Pretty much nothing else
@@ -116,7 +116,7 @@ Raffaele Di Fazio
 * REST API Development
 
 * REST API Development
-- Beware: very broad topic.
+- Beware: very broad topic
 - Idiomatic, fast, elegant, choose the metric you like
 - Do not optimize for all
 
