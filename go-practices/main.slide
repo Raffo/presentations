@@ -1,19 +1,19 @@
-Go Practices: Suggestions to not reinvent the wheel
+Go Practices: suggestions to not reinvent the wheel
 5 June 2018
 Tags: go golang
 
 Raffaele Di Fazio
 @x0rg
 
-* If you really need to do one thing... 
+* If you really need to do one thing...
 .image peter.png _ 400
 
-* If you really need to do one thing... 
+* If you really need to do one thing...
 .link https://peter.bourgon.org/go-for-industrial-programming/ Go for Industrial Programming
 .link https://peter.bourgon.org/blog/2017/06/09/theory-of-modern-go.html A Theory of Modern Go
 .link https://peter.bourgon.org/go-best-practices-2016/ Go best practices, six years in
 
-* Go practices 
+* Go practices
 : Those are things that made sense for me and a bunch of other folks doing ~3 years of Go in production.
 : There is no truth, only opinions and you have to try things to understand what works better.
 : Please take this with a grain of salt.
@@ -24,6 +24,7 @@ Raffaele Di Fazio
 .image hand.jpg _ 800
 
 * Topics
+- General Topics
 - Project structure
 - Building
 - Logging
@@ -32,6 +33,22 @@ Raffaele Di Fazio
 - HTTP API Development
 - CLI Tools
 - Testing
+
+* General Topics
+
+* Don't use the init function
+- Just don't, seriously
+- The *glog* example
+
+* glog: Google logging module
+- [[https://github.com/golang/glog]]
+.code glog.go
+
+* Dependency Injection
+- Do it in the main as much as you can
+- Initialize stuff
+- Wire things
+- Pretty much nothing else
 
 * Project structure
 
@@ -51,52 +68,89 @@ Raffaele Di Fazio
 * Logging
 
 * Logging
-- Avoid using the standard logger, has quite a lot of shortcomings.
+- Avoid using the standard logger, has quite a lot of shortcomings
 - Suggested: [[https://github.com/sirupsen/logrus]]
 - My favourite: [[https://github.com/go-kit/kit/tree/master/log]]
 - Take whatever you find simpler, don’t overcomplicate it
 
 * Logging cont'd
 - Always use structured logging
-
+- Agree on a format and stick with it
+.code logging-format.go
 
 * Logging can kill your app
-- Logging in the wrong way
+- Logging in the wrong way can make your application unresponsive
+- Do not rely on logging to understand what your app is doing
+- Use metrics instead (discussed later)
 
 * The downside of most loggers
 - If possible, use a pluggable logger such that you can ease your tests
-- Do *NOT* reinvent logging.
+- Logging *IS* a Dependency
+.code logger.go
+
+* No matter what you do... do NOT reinvent logging.
 
 * Monitoring
 
 * Monitoring
 - Consider exposing metrics from day 1!
-- Use [[https://github.com/go-kit/kit/tree/master/metrics]]
-- Expose the metrics in a goroutine
+- Possible tool [[https://github.com/go-kit/kit/tree/master/metrics]]
+- Expose the metrics in a separate goroutine
+
+* The metrics endpoint
+.code metrics.go
 
 * Dependency Management
 
 * Dependency Management
+- Yes it's kind of a mess in Go
 - Go uses the “vendor” folder
+- Many tools...
+- vgo proposal [[https://github.com/golang/go/wiki/vgo]]
+
+* Dependency Management 101
 - Try using [[https://github.com/golang/dep]] (semi official solution)
-- Alternative: [[https://github.com/Masterminds/glide]]
+- Good enough alternative: [[https://github.com/Masterminds/glide]]
+- Do not get lost in the universe of available tools
 
-* HTTP API Development
+* REST API Development
 
-* HTTP API Development
-- This is a very broad topic.
-- I would keep this for an entirely different presentation :-)
+* REST API Development
+- Beware: very broad topic
+- Idiomatic, fast, elegant, choose what matters the most for you
+- Do not optimize for all
+
+* REST API Development
+What are the timeouts for this code?
+.code timeouts.go
+
+* REST API Development
+- Using the default timeouts
+- Much better:
+.code better-timeouts.go
+
+* REST API Development
+- The same applies for client side
+.code better-timeouts-client.go
+
+* REST API Development
+- If you want to know more: [[https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/]]
+
+* REST API Development
+- Q: Do you want to know more about API first? Hit me now!
 
 * CLI Tools
 
 * CLI Tools
+- Make your application configurable via arguments
+- Define flags with variables *only* in the main function
 - Minimal tool with great flexibility [[https://github.com/alecthomas/kingpin]]
-- If you are doing something very complicated: [[https://github.com/spf13/cobra]]
+- If you are doing something more complicated: [[https://github.com/spf13/cobra]]
 
 * Testing
 
 * Testing
-- Use the standard library, it is just great
+- Start using the standard library
 - An alternative is testify: [[https://github.com/stretchr/testifys]]
 
 * Table driving testing
@@ -104,6 +158,8 @@ Raffaele Di Fazio
 
 * Advanced testing
 - Testing at Hashicorp [[https://www.youtube.com/watch?v=yszygk1cpEc]]
+
+* Some general recommendations
 
 * From "Go best practices, six years in"
 - Put $GOPATH/bin in your $PATH, so installed binaries are easily accessible.
