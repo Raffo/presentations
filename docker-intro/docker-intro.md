@@ -61,6 +61,20 @@ FROM ubuntu
 RUN apt-get update && apt-get install -y vim curl
 ```
 ---
+# Dockerfile commands
+- `RUN` command (non interactive) executed during the build
+- `CMD` default command to run when no default is given
+- `ENTRYPOINT` base command to run
+
+---
+
+# More directives
+- `COPY`: copies a file to the container at build time 
+```
+example
+```
+---
+
 # Let's build the image
 
 ```
@@ -119,9 +133,41 @@ docker system prune
 - Default tag `latest`
 - Can be specified at build time
 - Don't use `latest` ! 
+```
+docker tag <newImageId> figlet
+```
+---
 
+# Layers
+- Each command is a layer. 
+- `RUN rm ...` will remove things... which will be still available in the previous layer!
+- `RUN apt-get install XX && ap-get remove XX` would do (single layer)
+---
+# Better solution: multistage
+- Multistage builds allows to have multiple stage
+- One stage for building, one for the final image
+```
+FROM golang AS builder
+RUN ...
+FROM alpine
+COPY --from=builder /go/bin/mylittlebinary /usr/local/bin/
+```
+---
+# Docker registry
+- Place where the images are stored
+---
+# Curiosities
+- How does Docker work on a mac? 
+---
+# Things we haven't covered
+- Docker networking
+- Compose, volumes
 
 ---
+# Remarks
+- Don't store configuration in an image
+- **Never** store secrets inside an image
+
 # Links
 - [container.training intro to docker](http://container.training/intro-selfpaced.yml.html#1)
 
