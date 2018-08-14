@@ -4,16 +4,7 @@
 
 ---
 
-# Agenda
-
-- Docker basics
-- Why Docker
-- Creating our first Docker container
-- A look behind the scenes
----
-
 # This is a kind of short intro to docker. I've seen better tutorials... but they are about 700 slides. Go check it out if you want: https://container.training
-
 
 --- 
 # Docker basics
@@ -23,11 +14,14 @@
 
 - Not a new idea... 
 - Zones, Jails
+- "Containers" are linux only
 - Containers are not a real thing!
-- Combination of Linux's namespaces and CGroups
+	- Nothing in the kernel speaks about "containers"
+	- Combination of Linux's namespaces and CGroups
+	
 ---
 # Architecture
-![](/Users/raffo/Downloads/dockerjm1.webp)
+![VMs and containers](http://cdn.rancher.com/wp-content/uploads/2017/02/16175231/VMs-and-Containers.jpg)
 
 ---
 
@@ -36,31 +30,27 @@
 
 # Why Docker
 - A simple way to package applications in a self contained fashion
-- Run in the same way on laptop and server
-- Reproduceable cases
+- Run in the same way on laptop and server...
+- ... and have reproduceable deployments
 ---
-
+# Let's get our hands dirty
+---
+# Docker quickstart
+```
+docker run -rm -it ubuntu /bin/bash
+curl
+apt-get update
+apt-get install -y curl
+curl
+exit
+```
+---
 # Terminology
 - Dockerfile: a file with a description on how to build a docker image
 - Docker image: a built container
 - Image tag: version of an image
-
----
-# Your first docker container
-
-- Create a dockerfile 
-- Build a docker image
-
 ---
 
-# Dockerfile 
-
-```
-FROM ubuntu
-
-RUN apt-get update && apt-get install -y vim curl
-```
----
 # Dockerfile commands
 - `RUN` command (non interactive) executed during the build
 - `CMD` default command to run when no default is given
@@ -71,14 +61,28 @@ RUN apt-get update && apt-get install -y vim curl
 # More directives
 - `COPY`: copies a file to the container at build time 
 ```
-example
+COPY . . 
 ```
+---
+# Let's create a first Dockerfile
+---
+
+# Dockerfile 
+
+```
+FROM ubuntu
+
+RUN apt-get update && apt-get install -y vim curl
+```
+- Let's add this to a file named `Dockerfile`
 ---
 
 # Let's build the image
 
 ```
 mkdir testfolder && cd testfolder
+touch Dockerfile
+# Add content from the previous slide
 docker build -t first-image .
 docker run -it first-image /bin/bash
 figlet hello
@@ -96,22 +100,21 @@ figlet hello
 docker run -it first-image /bin/bash
 figlet hello
 ```
---- 
-# Dockerfile
-- You can add things there if you really need them 
---- 
-
 ---
 # What did just happen? 
 
-- Our container is now in a stopped state.
+- `figlet` is not available as it is not in the docker image.
 
-- It still exists on disk, but all compute resources have been freed up.
-
-- We will see later how to get back to that container.
 ---
 
-# Let's edit our files
+# Layers
+- Each command is a layer. 
+- `RUN rm ...` will remove things... which will be still available in the previous layer!
+- `RUN apt-get install XX && ap-get remove XX` would do (single layer)
+---
+
+# Let's edit our local files
+
 ```
 docker run -v $(pwd):/testfolder -it first-image /bin/bash
 cat "hello world" > /testfolder/foo
@@ -120,7 +123,8 @@ cat foo
 ```
 
 ---
-# A closer look
+# A closer look to Docker
+- There are many commands and functionalities, i.e.:
 ```
 docker images
 docker ps -a
@@ -130,6 +134,7 @@ docker system prune
 ```
 ---
 # Tagging images
+- Very important to know what we are running
 - Default tag `latest`
 - Can be specified at build time
 - Don't use `latest` ! 
@@ -138,12 +143,20 @@ docker tag <newImageId> figlet
 ```
 ---
 
-# Layers
-- Each command is a layer. 
-- `RUN rm ...` will remove things... which will be still available in the previous layer!
-- `RUN apt-get install XX && ap-get remove XX` would do (single layer)
+# Layers, layers, layers, ...
+```
+FROM ubuntu
+RUN apt-get install curl
+RUN apt-get install vim 
+RUN apt-get install ...
+...
+```
+- Each instructions creates a layer
+- Less layers, easier caching
+- Layers used wrong can expose secrets
 ---
-# Better solution: multistage
+
+# Improving our dockerfiles: multistage
 - Multistage builds allows to have multiple stage
 - One stage for building, one for the final image
 ```
@@ -153,8 +166,11 @@ FROM alpine
 COPY --from=builder /go/bin/mylittlebinary /usr/local/bin/
 ```
 ---
-# Docker registry
-- Place where the images are stored
+# Where do we store the images? 
+- Docker registry: where the images are stored
+- Can be self hosted or public
+- Docker hub ("default")
+- ECR, GCR, ... 
 ---
 # Curiosities
 - How does Docker work on a mac? 
@@ -162,11 +178,15 @@ COPY --from=builder /go/bin/mylittlebinary /usr/local/bin/
 # Things we haven't covered
 - Docker networking
 - Compose, volumes
-
 ---
 # Remarks
 - Don't store configuration in an image
 - **Never** store secrets inside an image
+---
+# Bonus
+- Find a way to download these slides...
+- ... start from `docker pull x0rg/docker-slides`
+
 
 # Links
 - [container.training intro to docker](http://container.training/intro-selfpaced.yml.html#1)

@@ -1,3 +1,5 @@
-FROM ubuntu
+FROM alpine
 
-RUN apt-get update && apt-get install -y vim curl
+COPY docker-intro.pdf .
+
+
