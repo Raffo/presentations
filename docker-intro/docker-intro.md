@@ -37,7 +37,7 @@
 ---
 # Docker quickstart
 ```
-docker run -rm -it ubuntu /bin/bash
+docker run -it ubuntu /bin/bash
 curl
 apt-get update
 apt-get install -y curl
@@ -117,7 +117,7 @@ figlet hello
 
 ```
 docker run -v $(pwd):/testfolder -it first-image /bin/bash
-cat "hello world" > /testfolder/foo
+echo "hello world" > /testfolder/foo
 exit
 cat foo
 ```
